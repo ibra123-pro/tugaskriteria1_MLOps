@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/tugaskriteria1_MLOps/tugaskriteria1_MLOps/mlruns/0/f3c0e1fe4d324c22a05d11381df950f5/artifacts
+end_time: 1780713709503
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f3c0e1fe4d324c22a05d11381df950f5
+run_name: rumbling-hare-90
+run_uuid: f3c0e1fe4d324c22a05d11381df950f5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780713707438
+status: 3
+tags: []
+user_id: runner
