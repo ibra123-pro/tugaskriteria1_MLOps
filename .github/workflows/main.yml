@@ -3,15 +3,16 @@ name: Automated Data Preprocessing Pipeline
 on:
   push:
     branches:
-      - main  
-  workflow_dispatch: 
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
   run-preprocessing:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+
     steps:
     - name: Checkout Repository Code
       uses: actions/checkout@v4
@@ -24,22 +25,26 @@ jobs:
     - name: Check Env Variables
       run: |
         echo "Mengunduh dataset dari URL: $EXCEL_URL"
+
     - name: Install Dependencies
-      working-directory: ./SMSML_Achmad-Ibrahim/preprocessing
+      # DIUBAH: Mengarah ke folder KRITERIA1
+      working-directory: ./KRITERIA1
       run: |
         python -m pip install --upgrade pip
         pip install pandas numpy scikit-learn openpyxl mlflow==2.19.0
-        
+
     - name: Run mlflow project
-      working-directory: ./SMSML_Achmad-Ibrahim/preprocessing
+      # DIUBAH: Mengarah ke folder KRITERIA1
+      working-directory: ./KRITERIA1
       run: |
-        mlflow run . -e automate_Achmad-Ibrahim.py --env-manager=local    
-        
+        mlflow run . -e automate_Achmad-Ibrahim.py --env-manager=local
+
     - name: Run Preprocessing Script
-      working-directory: ./SMSML_Achmad-Ibrahim/preprocessing
+      # DIUBAH: Mengarah ke folder KRITERIA1
+      working-directory: ./KRITERIA1
       run: |
         python automate_Achmad-Ibrahim.py
-        
+
     - name: Save mlruns to repo
       env:
           GIT_NAME: ${{ secrets.username }}
@@ -47,16 +52,20 @@ jobs:
       run: |
           git config --global user.name "${GIT_NAME:-ibra123-pro}"
           git config --global user.email "${GIT_EMAIL:-achmadibrahim21@gmail.com}"
-          # Tentukan variabel jalur sub-folder target agar dinamis
-          TARGET_DIR="SMSML_Achmad-Ibrahim/preprocessing"
+          
+          # DIUBAH: Target direktori disesuaikan menjadi KRITERIA1
+          TARGET_DIR="KRITERIA1"
+          
           # Tambahkan file output dataset jika ada di sub-folder
           if [ -f "$TARGET_DIR/data_penjualan_siap_ml.csv" ]; then
             git add "$TARGET_DIR/data_penjualan_siap_ml.csv"
           fi
+          
           # Tambahkan folder mlruns jika ada di sub-folder
           if [ -d "$TARGET_DIR/mlruns" ]; then
             git add "$TARGET_DIR/mlruns/"
           fi
+          
           # Tambahkan file sqlite mlflow database jika ada di sub-folder
           if [ -f "$TARGET_DIR/mlflow.db" ]; then
             git add "$TARGET_DIR/mlflow.db"
