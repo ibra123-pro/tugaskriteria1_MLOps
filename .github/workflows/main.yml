@@ -35,13 +35,13 @@ jobs:
 
     - name: Run mlflow project
       # DIUBAH: Mengarah ke folder KRITERIA1
-      working-directory: ./KRITERIA1
+      working-directory: ./kriteria1
       run: |
         mlflow run . -e automate_Achmad-Ibrahim.py --env-manager=local
 
     - name: Run Preprocessing Script
       # DIUBAH: Mengarah ke folder KRITERIA1
-      working-directory: ./KRITERIA1
+      working-directory: ./kriteria1
       run: |
         python automate_Achmad-Ibrahim.py
 
