@@ -27,21 +27,15 @@ jobs:
         echo "Mengunduh dataset dari URL: $EXCEL_URL"
 
     - name: Install Dependencies
-      # DIUBAH: Mengarah ke folder KRITERIA1
-      working-directory: ./kriteria1
       run: |
         python -m pip install --upgrade pip
         pip install pandas numpy scikit-learn openpyxl mlflow==2.19.0
 
     - name: Run mlflow project
-      # DIUBAH: Mengarah ke folder KRITERIA1
-      working-directory: ./kriteria1
       run: |
         mlflow run . -e automate_Achmad-Ibrahim.py --env-manager=local
 
     - name: Run Preprocessing Script
-      # DIUBAH: Mengarah ke folder KRITERIA1
-      working-directory: ./kriteria1
       run: |
         python automate_Achmad-Ibrahim.py
 
@@ -54,7 +48,7 @@ jobs:
           git config --global user.email "${GIT_EMAIL:-achmadibrahim21@gmail.com}"
           
           # DIUBAH: Target direktori disesuaikan menjadi KRITERIA1
-          TARGET_DIR="kriteria1"
+          TARGET_DIR="."
           
           # Tambahkan file output dataset jika ada di sub-folder
           if [ -f "$TARGET_DIR/data_penjualan_siap_ml.csv" ]; then
